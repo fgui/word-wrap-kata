@@ -5,7 +5,7 @@
 (deftest wrap-test
   (testing "simple test on line"
     (is (= "hola" (wrap "hola" 5)))
-    (is (= "hola" (wrap "hola" 3))))
-  (testing "multi-line ok"
-    (is (= "hola\nadeu" (wrap "hola\nadeu" 4))))
+    (is (= "hola" (wrap "hola" 4))))
+  (testing "multi-line ok" (is (= "hola\nadeu" (wrap "hola\nadeu" 4))))
+  (testing "split no space" (is (= "hola\nadeu" (wrap "holaadeu" 4))))
   )
