@@ -13,4 +13,9 @@
   (testing "split 3 times" (is (= "hola\nadeu\nbyebye"
                                   (wrap "hola adeu byebye" 6))))
   (testing "keep a space" (is (= "ho la\nadeu\nbyebye"
-                                 (wrap "ho la adeu byebye" 6)))))
+                                 (wrap "ho la adeu byebye" 6))))
+  (testing "text from Garajeando"
+    (is (= "This koko\nshould be\neasy unless\nthere are\nhidden, or\nnot so\nhidden,\nobstacles.\nLet's start!"
+           (wrap "This koko should be easy unless there are hidden, or not so hidden, obstacles. Let's start!" 12)))
+    )
+  )
