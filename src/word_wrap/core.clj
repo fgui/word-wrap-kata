@@ -1,16 +1,17 @@
 (ns word-wrap.core)
 
-(defn break-line [line column]
+(defn break-line [^String line ^long column]
   (if (empty? line)
     []
-    (cons
-     (apply str (take column line))
-     (break-line (drop column line) column))))
+    (let [last-space (.lastIndexOf (apply str (take (inc column) line)) " ")
+          end-line (if (pos? last-space) last-space column)
+          start-new-line (if (pos? last-space) (inc last-space) column)]
+      (cons
+       (apply str (take end-line line))
+       (break-line (drop start-new-line line) column)))))
 
-(defn lines
-  [^String text ^long column]
+(defn text->lines [^String text ^long column]
   (flatten (map #(break-line % column) (clojure.string/split text #"\n"))))
 
-(defn wrap
-  [^String text ^long column]
-  (clojure.string/join \newline (lines text column)))
+(defn wrap [^String text ^long column]
+  (clojure.string/join \newline (text->lines text column)))
